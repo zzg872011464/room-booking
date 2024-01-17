@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: room-booking
+  main:
+    allow-bean-definition-overriding: true
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  profiles:
+    # 使用本地环境
+    active: local
+logging:
+  config: classpath:log/logback-spring.xml
+  file:
+    path: logs/
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapper/*Mapper.xml

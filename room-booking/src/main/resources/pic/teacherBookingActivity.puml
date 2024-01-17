@@ -1,0 +1,48 @@
+@startuml
+start
+:数据校验;
+if (校验失败) then (yes)
+    :返回数据无效;
+    stop
+endif
+
+:查询课程信息;
+if (课程存在?) then (no)
+    :返回课程不存在错误;
+    stop
+else (yes)
+    :查询教师信息;
+endif
+
+if (教师存在?) then (no)
+    :返回教师不存在错误;
+    stop
+else (yes)
+    :筛选房间;
+endif
+
+if (有空余房间?) then (no)
+    :返回无空余座位错误;
+    stop
+else (yes)
+    :更新房间占用信息;
+endif
+
+if (更新成功?) then (no)
+    :返回更新房间占用失败;
+    stop
+else (yes)
+    :创建房间申请记录;
+endif
+
+if (创建成功?) then (no)
+    :返回预定记录插入失败;
+    stop
+else (yes)
+    :创建历史记录;
+    :异步发通知;
+    :返回成功;
+endif
+
+stop
+@enduml

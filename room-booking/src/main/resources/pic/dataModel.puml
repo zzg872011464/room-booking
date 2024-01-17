@@ -1,0 +1,111 @@
+@startuml
+entity "Teacher" {
+    * teacher_id : varchar(50)
+    --
+    * teacher_name : varchar(100)
+    * teacher_number : varchar(100)
+    * teacher_password : varchar(100)
+    * teacher_email : varchar(50)
+    * delete_flag : tinyint
+    * create_time : timestamp
+    * update_time : timestamp
+}
+
+entity "Student" {
+    * student_id : varchar(50)
+    --
+    * student_name : varchar(100)
+    * student_number : varchar(100)
+    * student_email : varchar(50)
+    * delete_flag : tinyint
+    * create_time : timestamp
+    * update_time : timestamp
+}
+
+entity "Room" {
+    * room_id : varchar(50)
+    --
+    * room_number : varchar(100)
+    * capacity : INT
+    * room_state : tinyint
+* delete_flag : tinyint
+* create_time : timestamp
+* update_time : timestamp
+}
+
+entity "Course" {
+* course_id : varchar(50)
+--
+* teacher_id : varchar(50)
+* course_name : varchar(100)
+* student_num : INT
+* delete_flag : tinyint
+* create_time : timestamp
+* update_time : timestamp
+}
+
+entity "Room Booking" {
+* booking_id : varchar(50)
+--
+* room_id : varchar(50)
+* teacher_id : varchar(50)
+* course_id : varchar(50)
+* week_day : tinyint
+* course_start : tinyint
+* booking_state : tinyint
+* deadline : DATE
+* delete_flag : tinyint
+* create_time : timestamp
+* update_time : timestamp
+}
+
+entity "Room Booking History" {
+* history_id : varchar(50)
+--
+* booking_id : varchar(50)
+* room_id : varchar(50)
+* teacher_id : varchar(50)
+* course_id : varchar(50)
+* week_day : tinyint
+* course_start : tinyint
+* booking_log : varchar(100)
+* deadline : DATE
+* process_time : timestamp
+* delete_flag : tinyint
+* create_time : timestamp
+* update_time : timestamp
+}
+
+entity "Room Occupancy" {
+* occupancy_id : varchar(50)
+--
+* room_id : varchar(50)
+* week_day : tinyint
+* course_start : tinyint
+* occupancy_state : tinyint
+* capacity : INT
+* booking_id : varchar(50)
+* delete_flag : tinyint
+* create_time : timestamp
+* update_time : timestamp
+}
+
+entity "Student Course" {
+* correlation_id : varchar(50)
+--
+* student_id : varchar(50)
+* course_id : varchar(50)
+* delete_flag : tinyint
+* create_time : timestamp
+* update_time : timestamp
+}
+
+' Relationships
+Teacher --> Course : "teaches >"
+Student --> "Student Course" : "enrolls >"
+"Student Course" --> Course : "< enrolled in"
+Course --> "Room Booking" : "requires >"
+"Room Booking" --> Room : "books >"
+"Room Booking" --> "Room Booking History" : "has >"
+"Room Occupancy" --> Room : "< occupies"
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+node "Web Server" {
+    [Thymeleaf Frontend] as Frontend
+}
+
+node "Application Server" {
+    [Spring MVC Application] as Application
+}
+
+database "Database Server" {
+    [MySQL Database] as Database
+}
+
+Frontend --> Application : sends requests
+Application --> Database : queries data
+@enduml

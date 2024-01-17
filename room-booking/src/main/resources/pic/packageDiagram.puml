@@ -1,0 +1,47 @@
+@startuml
+
+package "MVC Architecture" {
+
+    package "Controller (api)" {
+        [Controllers]
+    }
+
+    package "Service" {
+        [Services]
+    }
+
+    package "Data Access (mapper)" {
+        [Mappers]
+    }
+
+    package "Model (pojo)" {
+        [POJOs]
+    }
+
+    [Controllers] ..> [Services] : uses
+    [Services] ..> [Mappers] : uses
+    [Mappers] ..> [POJOs] : maps
+}
+
+package "Common Utilities (common)" {
+    [Utilities]
+}
+
+package "Exception Handling (exception)" {
+    [Exceptions]
+}
+
+package "Architecture Rules (arc)" {
+    [Architecture Standards]
+}
+
+' Relationships
+[Services] ..> [Utilities] : uses
+[Services] ..> [Exceptions] : uses
+[Controllers] ..> [Exceptions] : uses
+[Controllers] ..> [Utilities] : uses
+[Controllers] ..> [Architecture Standards] : follows
+[Services] ..> [Architecture Standards] : follows
+[Mappers] ..> [Architecture Standards] : follows
+
+@enduml

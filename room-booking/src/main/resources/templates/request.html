@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>教师教室预订</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>教师教室预订表单</h2>
+    <form action="/room/bookings/teacher/create" method="post">
+        <label for="teacherId">教师ID:</label>
+        <input type="text" id="teacherId" name="teacherId" required> <label for="courseId">课程ID:</label>
+        <input type="text" id="courseId" name="courseId" required>
+
+        <label for="weekDay">周天:</label>
+        <input type="number" id="weekDay" name="weekDay" required>
+
+        <label for="courseStart">课程开始时间:</label>
+        <input type="number" id="courseStart" name="courseStart" required>
+
+        <label for="deadline">截止日期:</label>
+        <input type="date" id="deadline" name="deadline" required>
+
+        <button type="submit">提交预订</button>
+    </form>
+</div>
+

@@ -1,0 +1,36 @@
+@startuml
+
+' 视图层 (View)
+class RoomBookingDTO {
+    - courseId : String
+    - teacherId : String
+    - weekDay : Integer
+    - courseStart : Integer
+}
+
+' 控制器层 (Controller)
+class TeacherController {
+    + teacherBooking(roomBookingDTO : RoomBookingDTO) : R<Object>
+}
+
+' 操作层 (Operation)
+class RoomBookingService {
+    + teacherBooking(roomBookingDTO : RoomBookingDTO) : R<Object>
+    + readAvailableRoomsByCourseAndStudentCount(roomOccupancy : RoomOccupancy, studentNum : Integer) : List<RoomOccupancy>
+    + updateByPrimaryKeyIfFree(roomOccupancy : RoomOccupancy) : Boolean
+}
+
+' 参数层 (Parameter)
+class RoomOccupancy {
+    - occupancyId : String
+    - capacity : Integer
+    - occupancyState : Integer
+}
+
+TeacherController --> RoomBookingDTO : uses
+TeacherController --> RoomBookingService : uses
+
+RoomBookingService --> RoomBookingDTO : uses
+RoomBookingService --> RoomOccupancy : uses
+
+@enduml

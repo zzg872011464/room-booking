@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+actor 教师
+actor 学生
+actor 管理员
+
+rectangle "机房安排系统" {
+    usecase "预定机房" as UC1
+    usecase "查询课程安排" as UC2
+    usecase "查看机房状态" as UC3
+    usecase "管理课程" as UC4
+    usecase "管理教师信息" as UC5
+    usecase "管理学生信息" as UC6
+    usecase "添加/修改机房信息" as UC7
+    usecase "撤销机房分配" as UC8
+    usecase "启用/停用机房" as UC9
+
+    教师 -- UC1
+    学生 -- UC2
+    教师 -- UC3
+    学生 -- UC3
+    教师 -- UC4
+    管理员 -- UC5
+    管理员 -- UC6
+    管理员 -- UC7
+    管理员 -- UC8
+    管理员 -- UC9
+}
+
+@enduml

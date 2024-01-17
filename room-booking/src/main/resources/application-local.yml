@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/roomBooking?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: roomBooking
+    password: roomBooking
+    hikari:
+      poolName: roomBooking
+      maximumPoolSize: 50
+      maxLifetime: 100000
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 25
+        prepStmtCacheSqlLimit: 256
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    encoding: UTF-8 #编码
+    suffix: .html #模板后缀
+    mode: HTML #模板
+server:
+  port: 8080
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: delete_flag # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)

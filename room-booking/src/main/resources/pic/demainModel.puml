@@ -1,0 +1,110 @@
+@startuml
+
+class Teacher {
+    - teacher_id : varchar(50)
+    - teacher_name : varchar(100)
+    - teacher_number : varchar(100)
+    - teacher_password : varchar(100)
+    - teacher_email : varchar(50)
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class Student {
+    - student_id : varchar(50)
+    - student_name : varchar(100)
+    - student_number : varchar(100)
+    - student_email : varchar(50)
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class Room {
+    - room_id : varchar(50)
+    - room_number : varchar(100)
+    - capacity : int
+    - room_state : tinyint
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class RoomBooking {
+    - booking_id : varchar(50)
+    - room_id : varchar(100)
+    - teacher_id : varchar(50)
+    - course_id : varchar(50)
+    - week_day : tinyint
+    - course_start : tinyint
+    - booking_state : tinyint
+    - deadline : date
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class Course {
+    - course_id : varchar(50)
+    - teacher_id : varchar(50)
+    - course_name : varchar(100)
+    - student_num : int
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class RoomBookingHistory {
+    - history_id : varchar(50)
+    - booking_id : varchar(50)
+    - room_id : varchar(100)
+    - teacher_id : varchar(50)
+    - course_id : varchar(50)
+    - week_day : tinyint
+    - course_start : tinyint
+    - booking_log : varchar(100)
+    - deadline : date
+    - process_time : timestamp
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class RoomOccupancy {
+    - occupancy_id : varchar(50)
+    - room_id : varchar(50)
+    - week_day : tinyint
+    - course_start : tinyint
+    - occupancy_state : tinyint
+    - capacity : int
+    - booking_id : varchar(50)
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+class StudentCourse {
+    - correlation_id : varchar(50)
+    - student_id : varchar(50)
+    - course_id : varchar(50)
+    - delete_flag : tinyint
+    - create_time : timestamp
+    - update_time : timestamp
+}
+
+Teacher "1" -- "0..*" RoomBooking : teaches >
+Teacher "1" -- "0..*" Course : offers >
+
+Room "1" -- "0..*" RoomBooking : contains >
+Room "1" -- "0..*" RoomOccupancy : has >
+
+RoomBooking "0..*" -- "0..1" RoomBookingHistory : hasHistory >
+RoomBooking "1" -- "0..*" RoomOccupancy : relatesTo
+Course "1" -- "0..*" RoomBooking : relatedTo >
+
+Student "0.." -- "0.." Course : enrolledIn >
+Student "0.." -- "0.." StudentCourse : takes >
+Course "1" -- "0..*" StudentCourse : includes >
+
+@enduml
